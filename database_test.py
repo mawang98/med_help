@@ -1,4 +1,6 @@
 import dabaseTool
 
-a = dabaseTool.CreateTable()
-a.createTableComments()
+
+
+b = dabaseTool.ChangeTableContent()
+c = b.update_data('sav','havechanged')
