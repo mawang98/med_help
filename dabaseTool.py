@@ -36,8 +36,9 @@ class ChangeTableContent(DatabaseTool): #修改数据表内容
     def update_data(self, medicine, comment):
         medicineA = medicine
         comment_new = comment
-        sql = '''UPDATE comment SET comment =? '''+'''WHERE medicine = '%s' '''%medicineA
-        self.cur.execute(sql, comment_new)
+        sql = '''UPDATE comment SET comment = '%s' WHERE medicine = '%s' ''' %(comment_new, medicineA)
+        print(sql)
+        self.cur.execute(sql)
         self.closeDb()
 
 

@@ -136,6 +136,7 @@ class EditerWin(QtWidgets.QWidget):
         self.change.show()
         self.change.ui.label.setText(now_med)
         self.change.ui.lineEdit.setText(now_comment)
+        self.change.ui.pushButton.clicked.connect(self.refreshTable)
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

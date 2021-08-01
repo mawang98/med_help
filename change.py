@@ -27,8 +27,16 @@ class ChangeWin(QtWidgets.QWidget):
         if not a:
             QtWidgets.QMessageBox.warning(self, '存在空白项目', '请完善空白项目')
         else:
-            a = self.ui.label.text()
-            b = self.ui.lineEdit.text()
+            med = self.ui.label.text()
+            com = self.ui.lineEdit.text()
+            try:
+                b = ChangeTableContent()
+                b.update_data(med, com)
+                c = QtWidgets.QMessageBox.information(self, '成功更改数据', '已成功更改数据')
+            except:
+                QtWidgets.QMessageBox.warning(self, '更改数据库错误', '更改数据库内容错误！')
+            self.close()
+
 
 
 
