@@ -1,16 +1,27 @@
-# 这是一个示例 Python 脚本。
+import sys
+import os
 
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
+
+class MainWindow(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = MainWindow()
+        self.ui.setupUi(self)
+        self.windowCenter()
+
+    def windowCenter(self): #   使窗口居中
+        screen = QtWidgets.QApplication.desktop()
+        size = self.geometry()
+        self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
 
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    mainw = MainWindow()
+    mainw.show()
+    sys.exit(app.exec_())
 
-
-# 按间距中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+if __name__ == "__main__":
+    main()

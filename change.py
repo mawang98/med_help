@@ -7,7 +7,7 @@ from dabaseTool import *
 
 
 class ChangeWin(QtWidgets.QWidget):
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_Form()
         self.a = self.ui.setupUi(self)
@@ -22,7 +22,7 @@ class ChangeWin(QtWidgets.QWidget):
     def slot_to_sig(self):
         self.ui.pushButton.clicked.connect(self.save_change)
 
-    def save_change(self):
+    def save_change(self): #保存更新
         a = self.check_blank()
         if not a:
             QtWidgets.QMessageBox.warning(self, '存在空白项目', '请完善空白项目')
@@ -37,10 +37,7 @@ class ChangeWin(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.warning(self, '更改数据库错误', '更改数据库内容错误！')
             self.close()
 
-
-
-
-    def check_blank(self):
+    def check_blank(self): #检查空白项
         a = self.ui.label.text()
         b = self.ui.lineEdit.text()
         if len(a) == 0 or len(b) == 0:

@@ -35,6 +35,7 @@ class EditerWin(QtWidgets.QWidget):
     def sinToslot(self):
         self.ui.pushButton.clicked.connect(self.saveItems)
         self.ui.pushButton_2.clicked.connect(self.removeItem)
+        self.ui.pushButton_4.clicked.connect(self.refreshTable)
         self.ui.tableWidget.itemDoubleClicked.connect(self.changeContentWin)
 
     def removeItem(self):  #已有条目删除
@@ -128,7 +129,7 @@ class EditerWin(QtWidgets.QWidget):
         except:
             QtWidgets.QMessageBox.warning(self,'数据库错误', '数据库检索错误！')
 
-    def changeContentWin(self):
+    def changeContentWin(self): #调出修改窗口
         cur_row = self.ui.tableWidget.currentRow()
         now_med = self.ui.tableWidget.item(cur_row, 0).text()
         now_comment = self.ui.tableWidget.item(cur_row, 1).text()
