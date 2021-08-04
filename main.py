@@ -4,11 +4,13 @@ import os
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 
+from Ui_main import *
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.ui = MainWindow()
-        self.ui.setupUi(self)
+        self.ui = Ui_MainWindow()
+        a = self.ui.setupUi(self)
         self.windowCenter()
 
     def windowCenter(self): #   使窗口居中
