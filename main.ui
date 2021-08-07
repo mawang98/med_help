@@ -52,8 +52,20 @@
      <height>36</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>设置医保项目</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
