@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>医保说明编辑器</string>
+   <string>医保说明编辑器1.0版</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2">
@@ -158,12 +158,24 @@
     </property>
     <addaction name="action"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="action_2"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">
    <property name="text">
     <string>设置医保项目</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>关于该软件</string>
    </property>
   </action>
  </widget>

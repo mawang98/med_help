@@ -8,6 +8,7 @@ from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from Ui_main import *
 from dabaseTool import *
 from editer import *
+from about import *
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -28,6 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def ini_set(self): #初始设置
         self.ui.pushButton.clicked.connect(self.refresh_list)
         self.ui.action.triggered.connect(self.set_comment_win)
+        self.ui.action_2.triggered.connect(self.show_about_win)
         self.ui.listWidget.itemClicked.connect(self.label_show_comment)
         self.ui.listWidget.currentRowChanged.connect(self.label_show_comment)
         self.ui.listWidget.itemDoubleClicked.connect(self.write_to_textmanager)
@@ -51,6 +53,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def set_comment_win(self): #菜单栏调取模板设置窗口
         self.ed_win = EditerWin()
         self.ed_win.show()
+
+    def show_about_win(self):
+        self.ab_win = AboutWin()
+        self.ab_win.show()
 
     def label_show_comment(self): #在标签中显示条目和内容
         if self.ui.listWidget.currentRow() == -1:
