@@ -6,6 +6,8 @@ from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 
 from Ui_main import *
 from dabaseTool import *
+from editer import *
+
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -13,6 +15,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         a = self.ui.setupUi(self)
         self.windowCenter()
+        self.ini_set()
         self.refresh_list()
 
     def windowCenter(self): #   使窗口居中
@@ -22,10 +25,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def ini_set(self):
         self.ui.pushButton.clicked.connect(self.refresh_list)
-        self.ui.action.clicked.connect()
+        self.ui.action.triggered.connect(self.set_comment_win)
 
     def set_comment_win(self):
-        pass
+        self.ed_win = EditerWin()
+        self.ed_win.show()
+
 
     def refresh_list(self):  #更新列表内容
         list_content = []
