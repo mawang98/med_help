@@ -37,7 +37,7 @@ class ChangeTableContent(DatabaseTool): #修改数据表内容
         medicineA = medicine
         comment_new = comment
         sql = '''UPDATE comment SET comment = '%s' WHERE medicine = '%s' ''' %(comment_new, medicineA)
-        print(sql)
+        # print(sql)
         self.cur.execute(sql)
         self.closeDb()
 
@@ -71,7 +71,7 @@ class  ReadTable(DatabaseTool): #读取数据表内容
     def readDatasWith_medicine_accurate(self, medicineName):  #精确检索
         nameB = medicineName
         sql ='''SELECT * FROM comment WHERE (medicine = '%s') ;'''%(nameB)
-        print(sql)
+        # print(sql)
         self.cur.execute(sql)
         a = self.cur.fetchall()
         return(a)

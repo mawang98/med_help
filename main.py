@@ -16,6 +16,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         a = self.ui.setupUi(self)
         self.windowCenter()
+        self.check_db_file()
         self.ini_set()
         self.refresh_list()
 
@@ -34,6 +35,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton_4.clicked.connect(self.delete_blank)
         self.ui.pushButton_2.clicked.connect(self.save_to_txt)
 
+    def check_db_file(self):  #检查数据库文件datas.db是否正常
+        find_db = 0
+        for fileName in os.listdir():
+            if fileName == 'datas.db':
+                find_db = 1
+                print('数据库文件正常')
+            else:
+                pass
+        if find_db == 0:
+            QtWidgets.QMessageBox.warning(self, '缺少数据库文件', '缺少数据库文件')
+        else:
+            pass
+
     def set_comment_win(self): #菜单栏调取模板设置窗口
         self.ed_win = EditerWin()
         self.ed_win.show()
@@ -44,7 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.label_2.clear()
         else:
             med_now = self.ui.listWidget.currentItem().text()
-            print(med_now)
+            # print(med_now)
             self.ui.label.clear()
             self.ui.label.setText(med_now)
             try:
@@ -55,21 +69,21 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.label_2.clear()
             self.ui.label_2.setText(b[0][1])
 
-    def write_to_textmanager(self):
+    def write_to_textmanager(self): #将当前cmment内容分行写入textEdit
         a = self.ui.label_2.text()
         if a[-1] in (',?.;!，。？；！'): #删除末尾标点符号
             b = a[0:-1]
-            print(b)
+            # print(b)
         else:
             b = a
-            print(b)
+            # print(b)
         self.ui.textEdit.append(b+'；')
 
     def delete_blank(self): #删除文本中的空白
         a = self.ui.textEdit.toPlainText()
-        print(a)
+        # print(a)
         b = a.replace('\n', '')
-        print(b)
+        # print(b)
         self.ui.textEdit.setText(b)
 
 
@@ -87,13 +101,13 @@ class MainWindow(QtWidgets.QMainWindow):
             for i in range(len(b)):
                 list_content.append(b[i][0])
                 self.ui.listWidget.insertItem(i,b[i][0])
-            print(list_content)
+            # print(list_content)
 
-    def save_to_txt(self):
+    def save_to_txt(self): #将textEdit中的文本保存成txt文件
         now_text = self.ui.textEdit.toPlainText()
         now_datetime = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         file_path = QtWidgets.QFileDialog.getSaveFileName(self, '保存文件', '医保说明'+'_%s'%now_datetime,'txt files(*.txt)')
-        print(file_path)
+        # print(file_path)
         try:
             file = open(file_path[0]+'.txt', 'w')
             file.write(now_text)
