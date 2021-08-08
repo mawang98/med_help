@@ -1,6 +1,7 @@
 import dabaseTool
 
 
-
-b = dabaseTool.ChangeTableContent()
-c = b.update_data('sav', 'havechanged')
+a = 'sav'
+b = dabaseTool.ReadTable()
+c = b.readDatasWith_medicine_accurate('sav')
+print(c)

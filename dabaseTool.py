@@ -68,7 +68,7 @@ class  ReadTable(DatabaseTool): #读取数据表内容
         return(a)
         self.closeDb()
     
-    def readDatasWith_medicine_accurate(self,medicineName):  #精确检索
+    def readDatasWith_medicine_accurate(self, medicineName):  #精确检索
         nameB = medicineName
         sql ='''SELECT * FROM comment WHERE (medicine = '%s') ;'''%(nameB)
         print(sql)

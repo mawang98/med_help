@@ -1,5 +1,6 @@
 import sys
 import os
+import datetime
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
@@ -23,13 +24,53 @@ class MainWindow(QtWidgets.QMainWindow):
         size = self.geometry()
         self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
 
-    def ini_set(self):
+    def ini_set(self): #初始设置
         self.ui.pushButton.clicked.connect(self.refresh_list)
         self.ui.action.triggered.connect(self.set_comment_win)
+        self.ui.listWidget.itemClicked.connect(self.label_show_comment)
+        self.ui.listWidget.currentRowChanged.connect(self.label_show_comment)
+        self.ui.listWidget.itemDoubleClicked.connect(self.write_to_textmanager)
+        self.ui.pushButton_3.clicked.connect(self.ui.textEdit.clear)
+        self.ui.pushButton_4.clicked.connect(self.delete_blank)
+        self.ui.pushButton_2.clicked.connect(self.save_to_txt)
 
-    def set_comment_win(self):
+    def set_comment_win(self): #菜单栏调取模板设置窗口
         self.ed_win = EditerWin()
         self.ed_win.show()
+
+    def label_show_comment(self): #在标签中显示条目和内容
+        if self.ui.listWidget.currentRow() == -1:
+            self.ui.label.clear()
+            self.ui.label_2.clear()
+        else:
+            med_now = self.ui.listWidget.currentItem().text()
+            print(med_now)
+            self.ui.label.clear()
+            self.ui.label.setText(med_now)
+            try:
+                a = ReadTable()
+                b = a.readDatasWith_medicine_accurate(med_now)
+            except:
+                QtWidgets.QMessageBox.warning(self, '数据库读取错误', '数据库读取错误！')
+            self.ui.label_2.clear()
+            self.ui.label_2.setText(b[0][1])
+
+    def write_to_textmanager(self):
+        a = self.ui.label_2.text()
+        if a[-1] in (',?.;!，。？；！'): #删除末尾标点符号
+            b = a[0:-1]
+            print(b)
+        else:
+            b = a
+            print(b)
+        self.ui.textEdit.append(b+'；')
+
+    def delete_blank(self): #删除文本中的空白
+        a = self.ui.textEdit.toPlainText()
+        print(a)
+        b = a.replace('\n', '')
+        print(b)
+        self.ui.textEdit.setText(b)
 
 
     def refresh_list(self):  #更新列表内容
@@ -48,9 +89,17 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.listWidget.insertItem(i,b[i][0])
             print(list_content)
 
-
-
-
+    def save_to_txt(self):
+        now_text = self.ui.textEdit.toPlainText()
+        now_datetime = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        file_path = QtWidgets.QFileDialog.getSaveFileName(self, '保存文件', '医保说明'+'_%s'%now_datetime,'txt files(*.txt)')
+        print(file_path)
+        try:
+            file = open(file_path[0]+'.txt', 'w')
+            file.write(now_text)
+            file.close()
+        except:
+            QtWidgets.QMessageBox.warning(self, '保存文件错误', '文件保存错误！')
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
